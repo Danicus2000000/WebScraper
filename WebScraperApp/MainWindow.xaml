@@ -8,7 +8,8 @@
         Title="Web Scraper" Height="450" Width="800" ResizeMode="CanMinimize">
     <Grid>
         <Button x:Name="scrape_btn" Content="Scrape Contents" HorizontalAlignment="Left" Margin="700,35,0,0" VerticalAlignment="Top" Height="18" Click="scrape_btn_Click"/>
-        <TextBox x:Name="url_txt" HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="Please Enter a URL" VerticalAlignment="Top" Width="685" Opacity="0.5" GotFocus="url_txt_GotFocus"/>
+        <TextBox x:Name="url_txt" HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="Please Enter a URL" VerticalAlignment="Top" Width="685" Opacity="0.5" GotFocus="url_txt_GotFocus" KeyDown="url_txt_KeyDown"/>
         <TextBox x:Name="result_txt" HorizontalAlignment="Center" Margin="0,58,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="780" Height="366" Visibility="Hidden" IsReadOnly="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <Button x:Name="save_btn" Content="Save to HTML" HorizontalAlignment="Left" Margin="706,12,0,0" VerticalAlignment="Top" Height="18" Click="save_btn_Click"/>
     </Grid>
 </Window>
