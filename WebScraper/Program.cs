@@ -12,7 +12,7 @@ while (true)
             {
                 Console.WriteLine("Please enter a web address to scrape:");
                 string address = "";
-                address = Console.ReadLine();
+                address = Console.ReadLine() ?? "";
                 result = getData.GetAsync(address).Result.Content.ReadAsStringAsync().Result;
                 pass = false;
             }
@@ -22,7 +22,7 @@ while (true)
                 pass = true;
             }
         }
-        result.Replace(">", ">\n");
+        result = result.Replace(">", ">\n");
         Console.WriteLine(result);
     }
     #endregion
@@ -40,9 +40,9 @@ while (true)
     }
     if (key == 'y') 
     {
-        string filename = "";
+        string filename;
         Console.WriteLine("Please enter the filename: ");
-        filename = Console.ReadLine();
+        filename = Console.ReadLine() ?? "";
         StreamWriter write=File.CreateText(filename+".txt");
         write.Write(result);
         write.Close();

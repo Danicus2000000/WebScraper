@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.IO;
+using System.Net.Http;
 namespace WebScraperApp
 {
     /// <summary>
@@ -26,7 +27,7 @@ namespace WebScraperApp
             InitializeComponent();
         }
 
-        private void url_txt_GotFocus(object sender, RoutedEventArgs e)
+        private void UrlTxtGotFocus(object sender, RoutedEventArgs e)
         {
             if (url_txt.Text == "Please Enter a URL")//clear url text on click in
             {
@@ -35,13 +36,13 @@ namespace WebScraperApp
             }
         }
 
-        private void scrape_btn_Click(object sender, RoutedEventArgs e)
+        private void ScrapeBtnClick(object sender, RoutedEventArgs e)
         {
             try//atempt scrape
             {
-                using (WebClient getData = new())
+                using (HttpClient getData = new())
                 {
-                    result_txt.Text = getData.DownloadString(url_txt.Text).Replace(">", ">\n");
+                    result_txt.Text = getData.GetStringAsync(url_txt.Text).Result.Replace(">", ">\n");
                 }
                 result_txt.Visibility=Visibility.Visible;
             }
@@ -51,14 +52,16 @@ namespace WebScraperApp
             }
         }
 
-        private void save_btn_Click(object sender, RoutedEventArgs e)
+        private void SaveBtnClick(object sender, RoutedEventArgs e)
         {
             if(result_txt.Text != "") 
             {
-                Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-                dlg.FileName = "Scrape"; // Default file name
-                dlg.DefaultExt = ".html"; // Default file extension
-                dlg.Filter = "Web Pages (.html)|*.html"; // Filter files by extension
+                Microsoft.Win32.SaveFileDialog dlg = new()
+                {
+                    FileName = "Scrape", // Default file name
+                    DefaultExt = ".html", // Default file extension
+                    Filter = "Web Pages (.html)|*.html" // Filter files by extension
+                };
 
                 // Show save file dialog box
                 Nullable<bool> result = dlg.ShowDialog();
@@ -75,11 +78,11 @@ namespace WebScraperApp
             }
         }
 
-        private void url_txt_KeyDown(object sender, KeyEventArgs e)
+        private void UrlTextKeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Enter) //when enter is pressed trigger scrape
             {
-                scrape_btn_Click(this, e);
+                ScrapeBtnClick(this, e);
             }
         }
     }
