@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="WebScraper/WebScraper.csproj" />
+  <Project Path="WebScraperApp/WebScraperApp.csproj" />
+</Solution>
